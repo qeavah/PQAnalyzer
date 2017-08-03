@@ -7,6 +7,8 @@ package pqanalyzer;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.util.Arrays;
+import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
@@ -14,13 +16,18 @@ import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
+import org.jfree.data.xy.XYDataset;
+import org.jfree.data.xy.XYSeries;
+import org.jfree.data.xy.XYSeriesCollection;
+
+
 
 /**
  *
  * @author KCh
  */
 public class AnalyzerWindow extends javax.swing.JFrame {
-
+Object[][] data;
     /**
      * Creates new form AnalyzerWindow
      */
@@ -37,6 +44,8 @@ public class AnalyzerWindow extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jFrame1 = new javax.swing.JFrame();
+        jPanel2 = new javax.swing.JPanel();
         bReadCSV = new javax.swing.JButton();
         ladress = new javax.swing.JTextField();
         lconfirm = new javax.swing.JLabel();
@@ -48,6 +57,21 @@ public class AnalyzerWindow extends javax.swing.JFrame {
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
+
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        javax.swing.GroupLayout jFrame1Layout = new javax.swing.GroupLayout(jFrame1.getContentPane());
+        jFrame1.getContentPane().setLayout(jFrame1Layout);
+        jFrame1Layout.setHorizontalGroup(
+            jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        jFrame1Layout.setVerticalGroup(
+            jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jFrame1Layout.createSequentialGroup()
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -68,6 +92,8 @@ public class AnalyzerWindow extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tbl.setCellSelectionEnabled(true);
+        tbl.setColumnSelectionAllowed(true);
         jScrollPane1.setViewportView(tbl);
         if (tbl.getColumnModel().getColumnCount() > 0) {
             tbl.getColumnModel().getColumn(0).setHeaderValue("Title 1");
@@ -175,22 +201,61 @@ public class AnalyzerWindow extends javax.swing.JFrame {
         
 
         
-        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-        dataset.setValue(1,"","1");
-        dataset.setValue(6,"","2");
-        dataset.setValue(2,"","3");
-        dataset.setValue(8,"","4");
-        dataset.setValue(0,"","5");
+    XYSeriesCollection dataset = new XYSeriesCollection();
+    XYSeries series1 = new XYSeries("Object 1");
+ 
+    System.out.println(tbl.getSelectedRowCount());
+    System.out.println(tbl.getSelectedColumnCount());
+
+    int[] k;
+    int[] r;
+        k = tbl.getSelectedColumns();
+        r = tbl.getSelectedRows();
+        System.out.println(Arrays.toString(k));
+        System.out.println(Arrays.toString(r));
         
-        JFreeChart chart = ChartFactory.createLineChart("Tytuł", "Kategoria", "Wartości", dataset);
+        System.out.println(tbl.getValueAt(0,0));
+        System.out.println(tbl.getModel().getValueAt(0,0).toString());
         
-        CategoryPlot catPlot = chart.getCategoryPlot();
-        catPlot.setRangeGridlinePaint(Color.BLACK);
+        
+        
+        /*
+        for(int m=k[0];m<k.length+k[0]-1;m++){
+            for (int n=r[0];n<r.length+r[0]-1;n++){
+                System.out.println(data[m][n]);
+            }
+        }
+        
+        */
+       
+ 
+    series1.add(1.0, 2.0);
+    series1.add(2.0, 3.0);
+    series1.add(3.0, 2.5);
+    series1.add(3.5, 2.8);
+    series1.add(4.2, 6.0);
+ 
+
+    dataset.addSeries(series1);
+
+        
+        JFreeChart chart = ChartFactory.createXYLineChart("Tytuł", "Kategoria", "Wartości", dataset);
         ChartPanel chartPanel = new ChartPanel(chart);
         
-        jPanel1.removeAll();
-        jPanel1.add(chartPanel, BorderLayout.CENTER);
-        jPanel1.validate();
+        jFrame1.setTitle("Kristoferson");
+        jFrame1.setSize(800,500);
+        jFrame1.setVisible(true);
+        
+        jPanel2.setLayout (new java.awt.BorderLayout());
+        jPanel2.setVisible(true);
+        jPanel2.removeAll();
+        jPanel2.add(chartPanel, BorderLayout.CENTER);
+        jPanel2.validate();
+
+        
+        
+
+        
     }//GEN-LAST:event_bGraphActionPerformed
 
     /**
@@ -231,11 +296,13 @@ public class AnalyzerWindow extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bGraph;
     private javax.swing.JButton bReadCSV;
+    private javax.swing.JFrame jFrame1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField ladress;
     private javax.swing.JLabel lconfirm;
