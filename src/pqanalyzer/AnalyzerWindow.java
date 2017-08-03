@@ -173,18 +173,17 @@ public class AnalyzerWindow extends javax.swing.JFrame {
     private void bGraphActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bGraphActionPerformed
         // TODO add your handling code here:
         
-        int s1 = 100;
-        int s2 = 200;
-        int s3 = 120;
-        int s4 = 250;
+
         
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-        dataset.setValue(s1,"","S1");
-        dataset.setValue(s2,"","S2");
-        dataset.setValue(s3,"","S3");
-        dataset.setValue(s4,"","S4");
+        dataset.setValue(1,"","1");
+        dataset.setValue(6,"","2");
+        dataset.setValue(2,"","3");
+        dataset.setValue(8,"","4");
+        dataset.setValue(0,"","5");
         
-        JFreeChart chart = ChartFactory.createBarChart("","","",dataset,PlotOrientation.HORIZONTAL, false,false,false);
+        JFreeChart chart = ChartFactory.createLineChart("Tytuł", "Kategoria", "Wartości", dataset);
+        
         CategoryPlot catPlot = chart.getCategoryPlot();
         catPlot.setRangeGridlinePaint(Color.BLACK);
         ChartPanel chartPanel = new ChartPanel(chart);
