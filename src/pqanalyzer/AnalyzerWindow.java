@@ -5,7 +5,15 @@
  */
 package pqanalyzer;
 
+import java.awt.BorderLayout;
+import java.awt.Color;
 import javax.swing.table.DefaultTableModel;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.CategoryPlot;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.data.category.DefaultCategoryDataset;
 
 /**
  *
@@ -34,8 +42,11 @@ public class AnalyzerWindow extends javax.swing.JFrame {
         lconfirm = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbl = new javax.swing.JTable();
+        jPanel1 = new javax.swing.JPanel();
+        bGraph = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -65,7 +76,25 @@ public class AnalyzerWindow extends javax.swing.JFrame {
             tbl.getColumnModel().getColumn(3).setHeaderValue("Title 4");
         }
 
+        jPanel1.setLayout(new java.awt.BorderLayout());
+
+        bGraph.setText("Graph");
+        bGraph.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bGraphActionPerformed(evt);
+            }
+        });
+
         jMenu1.setText("File");
+
+        jMenuItem1.setText("Open");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem1);
+
         jMenuBar1.add(jMenu1);
 
         jMenu2.setText("Edit");
@@ -85,9 +114,16 @@ public class AnalyzerWindow extends javax.swing.JFrame {
                         .addComponent(bReadCSV)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(ladress, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
-                .addComponent(lconfirm)
-                .addContainerGap(545, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(lconfirm)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(bGraph))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(32, 32, 32)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 374, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -96,10 +132,13 @@ public class AnalyzerWindow extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(bReadCSV)
                     .addComponent(ladress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lconfirm))
+                    .addComponent(lconfirm)
+                    .addComponent(bGraph))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1))
+                .addContainerGap(68, Short.MAX_VALUE))
         );
 
         pack();
@@ -123,9 +162,37 @@ public class AnalyzerWindow extends javax.swing.JFrame {
                     }
                 }
                 System.out.println(data.length);
-                    
+                    lconfirm.setText("OK");
                 }
     }//GEN-LAST:event_bReadCSVActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void bGraphActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bGraphActionPerformed
+        // TODO add your handling code here:
+        
+        int s1 = 100;
+        int s2 = 200;
+        int s3 = 120;
+        int s4 = 250;
+        
+        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        dataset.setValue(s1,"","S1");
+        dataset.setValue(s2,"","S2");
+        dataset.setValue(s3,"","S3");
+        dataset.setValue(s4,"","S4");
+        
+        JFreeChart chart = ChartFactory.createBarChart("","","",dataset,PlotOrientation.HORIZONTAL, false,false,false);
+        CategoryPlot catPlot = chart.getCategoryPlot();
+        catPlot.setRangeGridlinePaint(Color.BLACK);
+        ChartPanel chartPanel = new ChartPanel(chart);
+        
+        jPanel1.removeAll();
+        jPanel1.add(chartPanel, BorderLayout.CENTER);
+        jPanel1.validate();
+    }//GEN-LAST:event_bGraphActionPerformed
 
     /**
      * @param args the command line arguments
@@ -163,10 +230,13 @@ public class AnalyzerWindow extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton bGraph;
     private javax.swing.JButton bReadCSV;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField ladress;
     private javax.swing.JLabel lconfirm;
