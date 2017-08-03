@@ -201,42 +201,32 @@ Object[][] data;
         
 
         
-    XYSeriesCollection dataset = new XYSeriesCollection();
-    XYSeries series1 = new XYSeries("Object 1");
+        XYSeriesCollection dataset = new XYSeriesCollection();
+        XYSeries series1 = new XYSeries("Object 1");
  
-    System.out.println(tbl.getSelectedRowCount());
-    System.out.println(tbl.getSelectedColumnCount());
+        System.out.println(tbl.getSelectedRowCount());
+        System.out.println(tbl.getSelectedColumnCount());
 
-    int[] k;
-    int[] r;
+        int[] k;
+        int[] r;
         k = tbl.getSelectedColumns();
         r = tbl.getSelectedRows();
         System.out.println(Arrays.toString(k));
         System.out.println(Arrays.toString(r));
-        
-        System.out.println(tbl.getValueAt(0,0));
-        System.out.println(tbl.getModel().getValueAt(0,0).toString());
-        
-        
-        
-        /*
-        for(int m=k[0];m<k.length+k[0]-1;m++){
-            for (int n=r[0];n<r.length+r[0]-1;n++){
-                System.out.println(data[m][n]);
-            }
-        }
-        
-        */
-       
- 
-    series1.add(1.0, 2.0);
-    series1.add(2.0, 3.0);
-    series1.add(3.0, 2.5);
-    series1.add(3.5, 2.8);
-    series1.add(4.2, 6.0);
- 
 
-    dataset.addSeries(series1);
+       
+        for (int i=r[0];i<r.length+r[0]-1;i++) {
+        String a= tbl.getValueAt(r[i],k[0]).toString();
+        String b= tbl.getValueAt(r[i],k[1]).toString();
+         
+        Double a1 = Double.parseDouble(a);
+        Double b1 = Double.parseDouble(b);
+         
+        series1.add(a1,b1);
+        System.out.println(a1+" "+b1);
+        }
+         
+        dataset.addSeries(series1);
 
         
         JFreeChart chart = ChartFactory.createXYLineChart("Tytuł", "Kategoria", "Wartości", dataset);
@@ -251,6 +241,7 @@ Object[][] data;
         jPanel2.removeAll();
         jPanel2.add(chartPanel, BorderLayout.CENTER);
         jPanel2.validate();
+ 
 
         
         
