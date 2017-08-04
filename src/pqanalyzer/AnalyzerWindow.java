@@ -84,23 +84,7 @@ Object[][] data;
 
         ladress.setText("PQData.csv");
 
-        tbl.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        tbl.setCellSelectionEnabled(true);
-        tbl.setColumnSelectionAllowed(true);
         jScrollPane1.setViewportView(tbl);
-        if (tbl.getColumnModel().getColumnCount() > 0) {
-            tbl.getColumnModel().getColumn(0).setHeaderValue("Title 1");
-            tbl.getColumnModel().getColumn(1).setHeaderValue("Title 2");
-            tbl.getColumnModel().getColumn(2).setHeaderValue("Title 3");
-            tbl.getColumnModel().getColumn(3).setHeaderValue("Title 4");
-        }
 
         jPanel1.setLayout(new java.awt.BorderLayout());
 
@@ -164,7 +148,7 @@ Object[][] data;
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jScrollPane1))
-                .addContainerGap(68, Short.MAX_VALUE))
+                .addContainerGap(84, Short.MAX_VALUE))
         );
 
         pack();
